@@ -1,0 +1,15 @@
+[{
+   "name1": "Pariwesh MacBook Pro 20",
+        "year": 2019,
+      "price": 1849.99,
+      "CPU model": "Intel Core i9",
+      "Hard disk size": "1 TB"
+  },
+{
+   "name1": "Dinesh MacBook Pro 26",
+      "year": 2020,
+      "price": 1999.99,
+      "CPU model": "Intel Core i9",
+      "Hard disk size": "1 TB"
+  
+}]
