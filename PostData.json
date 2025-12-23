@@ -12,4 +12,14 @@
       "CPU model": "Intel Core i9",
       "Hard disk size": "1 TB"
   
-}]
+},
+{
+   "name1": "Dinesh MacBook Pro 56",
+      "year": 2021,
+      "price": 1999.99,
+      "CPU model": "Intel Core i9",
+      "Hard disk size": "1 TB"
+  
+}
+
+]
