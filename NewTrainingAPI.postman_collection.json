@@ -1,0 +1,316 @@
+{
+	"info": {
+		"_postman_id": "9acd0fe0-aa56-417f-be95-846213cf048d",
+		"name": "TrainingAPI",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "8648511"
+	},
+	"item": [
+		{
+			"name": "GetRequest",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://api.restful-api.dev/objects?id={{myid}}",
+					"protocol": "https",
+					"host": [
+						"api",
+						"restful-api",
+						"dev"
+					],
+					"path": [
+						"objects"
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "{{myid}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetFailure",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Your test name\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.value).to.eql();\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://api.restful-api.dev/objects?id=ff808",
+					"protocol": "https",
+					"host": [
+						"api",
+						"restful-api",
+						"dev"
+					],
+					"path": [
+						"objects"
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "ff808"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PostRequest",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n   \"name\": \"{{name1}}\",\r\n   \"data\":{\r\n    \"yesr\":\"{{year}}\"\r\n   }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "https://api.restful-api.dev/objects"
+			},
+			"response": []
+		},
+		{
+			"name": "PostRequest Server",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"item\" : \"iPhone 17 Pro\",\r\n\"price\" : 4000\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:3000/orders"
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Request",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": "https://api.restful-api.dev/objects/{{id}}"
+			},
+			"response": []
+		},
+		{
+			"name": "Put Request",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n   \"name\": \"Apple MacBook Pro 16\",\r\n   \"data\": {\r\n      \"year\": 2019,\r\n      \"price\": 2049.99,\r\n      \"CPU model\": \"Intel Core i9\",\r\n      \"Hard disk size\": \"1 TB\",\r\n      \"color\": \"silver\"\r\n   }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "https://api.restful-api.dev/objects/7"
+			},
+			"response": []
+		},
+		{
+			"name": "Basic Auth",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Cookie",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "Get Cookie",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "JavaScripts",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Check Apple Watch Series 8 exists\", function () {\r",
+							"    let jsonData = pm.response.json();\r",
+							"    let item = jsonData.find(x => x.name === \"Apple Watch Series 8\");\r",
+							"    pm.expect(item).to.not.be.undefined;\r",
+							"});\r",
+							"\r",
+							"pm.test(\"id property should be equal to 8\", function () {\r",
+							"    const response = pm.response.json();\r",
+							"    const item = response.find(x => x.id === \"8\");\r",
+							"    pm.expect(item).to.not.be.undefined;\r",
+							"});\r",
+							"\r",
+							"pm.test(\"response has 'content-type' header\", function () {\r",
+							"    const present = pm.response.headers.get('Content-Type');\r",
+							"    console.log(present);\r",
+							"    //pm.expect(present).to.be.true;\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response has no cookies\", function () {\r",
+							"    const cookies = pm.cookies.toObject();\r",
+							"    pm.expect(Object.keys(cookies).length).to.equal(0);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Check if color Red exists\", function () {\r",
+							"    let response = pm.response.json();\r",
+							"\r",
+							"    for (let item of response) {\r",
+							"        if (item.data && item.data.Color === \"Red\") {\r",
+							"            found = true;\r",
+							"        }\r",
+							"    }\r",
+							"    pm.expect(found).to.be.true;\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Total number of records\", function () {\r",
+							"    let response = pm.response.json();   // Convert response to JSON\r",
+							"    let total = response.length;         // Count items in the array\r",
+							"\r",
+							"    console.log(\"Total records:\", total); // Print in console\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "{{baseURL}}objects"
+			},
+			"response": []
+		},
+		{
+			"name": "All Request",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "{{baseURL}}objects"
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"requests": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"requests": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "BaseUrl",
+			"value": "",
+			"disabled": true
+		}
+	]
+}
