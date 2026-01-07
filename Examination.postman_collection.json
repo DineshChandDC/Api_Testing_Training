@@ -1,0 +1,349 @@
+{
+	"info": {
+		"_postman_id": "cba95c70-71fd-4ed9-8d8f-94e125e52079",
+		"name": "Examination",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "8648511"
+	},
+	"item": [
+		{
+			"name": "Test_GEtAllCarts",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"status code is 200\", function(){\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"pm.test(\"Response has carts array\", function () {\r",
+							"    let jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData).to.have.property(\"carts\");\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "https://dummyjson.com/carts"
+			},
+			"response": []
+		},
+		{
+			"name": "Test_GETCartTotalsValidationforAllCarts",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Validate totalQuantity for all carts\", function () {\r",
+							"    let jsonData = pm.response.json();\r",
+							"\r",
+							"    // Loop through each cart\r",
+							"    jsonData.carts.forEach(cart => {\r",
+							"        // Calculate sum of product quantities\r",
+							"        let sumQty = cart.products.reduce((acc, p) => acc + p.quantity, 0);\r",
+							"\r",
+							"        // Assert that totalQuantity matches sum of product quantities\r",
+							"        pm.expect(cart.totalQuantity).to.eql(sumQty);\r",
+							"    });\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Validate product totals for all carts\", function () {\r",
+							"    let jsonData = pm.response.json();\r",
+							"\r",
+							"    // Loop through each cart\r",
+							"    jsonData.carts.forEach(cart => {\r",
+							"        cart.products.forEach(p => {\r",
+							"            // Assert that product total = price * quantity\r",
+							"            pm.expect(p.total).to.eql(p.price * p.quantity);\r",
+							"        });\r",
+							"    });\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "https://dummyjson.com/carts"
+			},
+			"response": []
+		},
+		{
+			"name": "Test_GETproductpricevalidationinsidecart",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Validate totalQuantity for all carts\", function () {\r",
+							"    let jsonData = pm.response.json();\r",
+							"\r",
+							"    // Loop through each cart\r",
+							"    jsonData.carts.forEach(cart => {\r",
+							"        // Calculate sum of product quantities\r",
+							"        let sumQty = cart.products.reduce((acc, p) => acc + p.quantity, 0);\r",
+							"\r",
+							"        // Assert that totalQuantity matches sum of product quantities\r",
+							"        pm.expect(cart.totalQuantity).to.eql(sumQty);\r",
+							"    });\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Validate product totals for all carts\", function () {\r",
+							"    let jsonData = pm.response.json();\r",
+							"\r",
+							"    // Loop through each cart\r",
+							"    jsonData.carts.forEach(cart => {\r",
+							"        cart.products.forEach(p => {\r",
+							"            // Assert that product total = price * quantity\r",
+							"            pm.expect(p.total).to.eql(p.price * p.quantity);\r",
+							"        });\r",
+							"    });\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "https://dummyjson.com/carts"
+			},
+			"response": []
+		},
+		{
+			"name": "Test_GETcartbyvalidID",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"pm.test(\"Cart has correct ID\", function () {\r",
+							"    let jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.id).to.eql(1);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "https://dummyjson.com/carts/1"
+			},
+			"response": []
+		},
+		{
+			"name": "Test_GETcartbyInvalidID",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 404\", function () {\r",
+							"    pm.response.to.have.status(404);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "https://dummyjson.com/carts/111111"
+			},
+			"response": []
+		},
+		{
+			"name": "Test_PostAddNewCart",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"pm.test(\"Cart created successfully\", function () {\r",
+							"    let jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.userId).to.eql(33);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"userId\": 33,\r\n  \"products\": [\r\n    { \"id\": 100, \"quantity\": 2 },\r\n    { \"id\": 78, \"quantity\": 1 }\r\n  ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "https://dummyjson.com/carts/add"
+			},
+			"response": []
+		},
+		{
+			"name": "Test_PUT_updatecartwithnewproductlist",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"pm.test(\"Cart updated successfully\", function () {\r",
+							"    let jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.products[0].quantity).to.eql(10);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"products\": [\r\n    { \"id\": 183, \"quantity\": 10 }\r\n  ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "https://dummyjson.com/carts/1"
+			},
+			"response": []
+		},
+		{
+			"name": "Test_DeletebyId",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"pm.test(\"Cart updated successfully\", function () {\r",
+							"    let jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.products[0].quantity).to.eql(10);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"products\": [\r\n    { \"id\": 183, \"quantity\": 10 }\r\n  ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "https://dummyjson.com/carts/1"
+			},
+			"response": []
+		},
+		{
+			"name": "Test_PUT_updatecartwithInvalidProduct",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400 or 404\", function () {\r",
+							"    pm.expect([400,404]).to.include(pm.response.code);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"products\": [\r\n    { \"id\": 9999, \"quantity\": 1 }\r\n  ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "https://dummyjson.com/carts/1"
+			},
+			"response": []
+		},
+		{
+			"name": "Test_ProducthasTitle",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"First product has title\", function () {\r",
+							"    let jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.products[0]).to.have.property(\"title\");\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "https://dummyjson.com/carts/1"
+			},
+			"response": []
+		}
+	]
+}
